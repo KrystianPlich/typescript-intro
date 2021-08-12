@@ -6,7 +6,7 @@ interface Context {
 interface LoggerInterface {
     message: string;
     context: Context;
-    // log: void;
+    log(message: string): void;
 }
 class Logger implements LoggerInterface {
     message: string;
@@ -49,14 +49,14 @@ class ComplexClass implements ComplexInterface {
 // Zadanie: Stwórz klasę generators udostępniającą metodę generującą pesel
 
 class generators {
-    pesel: string[];
-    newDate: string;
-    dateArray: string[];
-    multipliedBy = [1,3,7,9,1,3,7,9,1,3];
-    x: string[];
-    sumOfMultipliedArr: number[];
-    sumOfMultiplied: number;
-    checkSum: number;
+    private pesel: string[];
+    private newDate: string;
+    private dateArray: string[];
+    private multipliedBy = [1,3,7,9,1,3,7,9,1,3];
+    private x: string[];
+    private sumOfMultipliedArr: number[];
+    private sumOfMultiplied: number;
+    private checkSum: number;
     generatePesel(birthDate: Date): string {
         this.pesel = [];
         this.newDate = moment(birthDate).format('YYMMDD');
@@ -64,13 +64,8 @@ class generators {
         this.pesel.push(...this.dateArray)
         this.x = (Math.floor(Math.random()*9000) + 1000).toString().split("");
         this.pesel.push(...this.x);
-        console.log(this.pesel.length);
-        this.sumOfMultipliedArr = this.pesel.map(function(val, index) {
-            return parseInt(val)*this.multipliedBy[index]
-        }.bind(this));
-        this.sumOfMultiplied = this.sumOfMultipliedArr.reduce(function(prev,curr) {
-            return prev + curr;
-        });
+        this.sumOfMultipliedArr = this.pesel.map((val, index) => parseInt(val)*this.multipliedBy[index]);
+        this.sumOfMultiplied = this.sumOfMultipliedArr.reduce((prev,curr) => prev + curr);
         this.checkSum= 10 - this.sumOfMultiplied%10;
         this.pesel.push(this.checkSum.toString());
         return this.pesel.join("");
