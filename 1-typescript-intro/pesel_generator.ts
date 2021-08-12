@@ -1,4 +1,4 @@
-function pesel_gen(birthDate: string) {
+function peselGen(birthDate: string) {
     let pesel: string[] = [];
     const multipliedBy: number[] = [1,3,7,9,1,3,7,9,1,3];
     let newDate: string = birthDate.slice(8) + birthDate.slice(3,5) + birthDate.slice(0,2);
@@ -17,4 +17,4 @@ function pesel_gen(birthDate: string) {
     return pesel.join("");
 }
 
-console.log(pesel_gen('30/05/1994'));
+export { peselGen }
