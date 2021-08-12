@@ -6,6 +6,7 @@ interface Context {
 interface LoggerInterface {
     message: string;
     context: Context;
+    // log: void;
 }
 class Logger implements LoggerInterface {
     message: string;
@@ -51,21 +52,22 @@ class generators {
     pesel: string[];
     newDate: string;
     dateArray: string[];
+    multipliedBy = [1,3,7,9,1,3,7,9,1,3];
     x: string[];
     sumOfMultipliedArr: number[];
     sumOfMultiplied: number;
     checkSum: number;
     generatePesel(birthDate: Date): string {
-        let multipliedBy = [1,3,7,9,1,3,7,9,1,3];
         this.pesel = [];
-        this.newDate = moment(birthDate).format('YY-MM-DD');
-        this.dateArray = this.newDate.split("-");
+        this.newDate = moment(birthDate).format('YYMMDD');
+        this.dateArray = this.newDate.split("");
         this.pesel.push(...this.dateArray)
         this.x = (Math.floor(Math.random()*9000) + 1000).toString().split("");
         this.pesel.push(...this.x);
+        console.log(this.pesel.length);
         this.sumOfMultipliedArr = this.pesel.map(function(val, index) {
-            return parseInt(val)*multipliedBy[index]
-        });
+            return parseInt(val)*this.multipliedBy[index]
+        }.bind(this));
         this.sumOfMultiplied = this.sumOfMultipliedArr.reduce(function(prev,curr) {
             return prev + curr;
         });
