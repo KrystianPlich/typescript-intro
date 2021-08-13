@@ -1,5 +1,7 @@
-function add(x: number, y: number): number {
-    return x + y;
+function add(...args: number[]): number {
+    return [...args].reduce(function(x,y) {
+        return x+y;
+    });
 }
 
 console.log(add(Math.random(), Math.random()))
