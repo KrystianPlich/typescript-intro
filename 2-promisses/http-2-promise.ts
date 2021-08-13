@@ -29,9 +29,17 @@ function httpRequst(): Promise<string> {
     });
 }
 
-httpRequst().then(function(value) {
-    console.log(value)
-})
+async function promiseHandler() {
+    try {
+        const newValue = await httpRequst();
+        console.log(newValue);
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+promiseHandler();
 
 console.log("Data received");
 
