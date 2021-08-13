@@ -29,9 +29,9 @@ function httpRequst(): Promise<string> {
     });
 }
 
-async function promiseHandler(callback) {
+async function promiseHandler() {
     try {
-        const newValue = await callback;
+        const newValue = await httpRequst();
         console.log(newValue);
     }
     catch (err) {
@@ -39,7 +39,7 @@ async function promiseHandler(callback) {
     }
 }
 
-promiseHandler(httpRequst())
+promiseHandler();
 
 console.log("Data received");
 
